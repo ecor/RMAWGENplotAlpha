@@ -1,0 +1,66 @@
+# TODO: Add comment
+# 
+# Author: ecor
+###############################################################################
+# file corplot.R
+#
+# This file ...
+#
+# author: Emanuele Cordano on 17-01-2014
+#
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License, or
+#(at your option) any later version.
+#
+#This program is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU General Public License for more details.
+#
+#You should have received a copy of the GNU General Public License
+#along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+###############################################################################
+
+
+#library(ggplot2)
+#library(reshape2)
+#library(RMAWGEN)
+#
+#
+##'
+##' 
+#
+#
+#addseason <- function(data,origin,nodata=TRUE) {
+#	
+#	
+#	winter <- c(12,1,2) #c("Dec","Jan","Feb")
+#	spring <- c(3,4,5)  #c("Mar","Apr","May")
+#	summer <- c(6,7,8)  #c("Jun","Jul","Aug")
+#	autumn <- c(9,10,11) #c("Sep","Oct","Nov")
+#	
+#	
+#	out <- adddate(data,origin=origin)
+#	
+#	
+#	season <- array("noseason",length(data$month))
+##	season[out$month %in% winter] <- "DJF"
+##	season[out$month %in% spring] <- "MAM"
+##	season[out$month %in% summer] <- "JJA"
+##	season[out$month %in% autumn] <- "SON"
+#
+#	season[out$month %in% winter] <- "a) DJF"
+#	season[out$month %in% spring] <- "b) MAM"
+#	season[out$month %in% summer] <- "c) JJA"
+#	season[out$month %in% autumn] <- "d) SON"
+#	
+#	out$season <- factor(season)
+#	if (nodata) out <- out[c("season",names(data))]
+#	
+#	return(out)
+#	
+#}
+
+NULL

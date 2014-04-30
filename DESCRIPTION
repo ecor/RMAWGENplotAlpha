@@ -1,0 +1,14 @@
+Package: RMAWGENplotAlpha
+Maintainer: Emanuele Cordano <emanuele.cordano@gmail.com>
+License: GPL (>= 2)
+Title: RMAWGENplot: plotting function for RMAWGEN results
+Type: Package
+Depends:
+    R (>= 2.10),RMAWGEN,RMRAINGEN,ggplot2,stringr,reshape2
+Author: Emanuele Cordano
+Description: This package is built for graphical representation of RMAWGEN
+    results. This package is experimental and under development.
+    Bugs/comments/questions/collaboration of any kind are warmly welcomed.
+Version: 1.0
+Repository: NA
+Date: 2014-04-29
