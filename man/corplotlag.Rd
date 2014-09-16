@@ -1,6 +1,6 @@
 \name{corplotlag}
 \alias{corplotlag}
-\title{Function which plots the correlation among observed and generated variables}
+\title{corplotlag}
 \usage{
 corplotlag(x = Tn_mes, y = Tn_gen, corx = NULL, xlab = "observed",
   ylab = "generated", title = "Spatial Correlation", season = FALSE,
@@ -31,7 +31,7 @@ corplotlag(x = Tn_mes, y = Tn_gen, corx = NULL, xlab = "observed",
 
   \item{useGPCA}{integer value. If it is greater than 0,
   GPCA interations are made in preprocessing. See
-  \link{\code{GPCA}}. Default is 0, no GPCA are
+  \code{\link{GPCA}}. Default is 0, no GPCA are
   preprocessed.}
 
   \item{signif}{singificance used to plot confindence

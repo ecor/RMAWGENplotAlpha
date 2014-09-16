@@ -73,7 +73,7 @@ corlag <- function(x,lag=1,...) {
 
 NULL
 
-#'
+#' corplotlag
 #' 
 #' Function which plots the correlation among observed and generated variables
 #'
@@ -84,7 +84,7 @@ NULL
 #' @param lag lag for autocorrelation 
 #' @param return.just.data.frame logical value. If \code{TRUE} functions returns no plot but just the date frame between observed and modeled autocrosscorrelations. Default is \code{FALSE}. 
 #' @param cor.null.value null value for correlation corresponc test. See \code{\link{cocor.indep.groups}} or \url{http://comparingcorrelations.org/}.
-#' @param useGPCA integer value. If it is greater than 0, GPCA interations are made in preprocessing. See \link{\code{GPCA}}. Default is 0, no GPCA are preprocessed.
+#' @param useGPCA integer value. If it is greater than 0, GPCA interations are made in preprocessing. See \code{\link{GPCA}}. Default is 0, no GPCA are preprocessed.
 #' @param signif singificance used to plot confindence interval. Default is 0.05 . 
 #' @param ... further arguments for eastetics. See \code{\link{aes}} 
 #' 
