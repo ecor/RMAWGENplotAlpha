@@ -2,7 +2,7 @@
 \alias{ccgammaplot}
 \title{Function which plots the correlation among observed and generated variables}
 \usage{
-ccgammaplot(x = prec_mes, y = prec_gen, use = "everything", corx = NULL,
+ccgammaplot(x, y, use = "everything", corx = NULL,
   return.value = c("nooccurence", "occurence", "continuity_ratio",
   "nooccurence_gcorrelation"), lag = 0, tolerance = 1e-04, valmin = 0.5,
   interval = c(-1, 1), nearPD = (lag >= 0), xlab = "observed",
@@ -27,6 +27,15 @@ ccgammaplot(x = prec_mes, y = prec_gen, use = "everything", corx = NULL,
   \item{lag}{lag expressed in days used for the computation
   in \code{\link{CCGamma}}. It must contain only one value,
   it must not be a vector.}
+
+  \item{xlab,ylab,title}{title and axis labels}
+
+  \item{season}{logical value. If \code{TRUE} (default)
+  plots are separated per seasons.}
+
+  \item{origin}{date corresponding to the first row}
+
+  \item{use}{see argement entry on \code{\link{cor}}.}
 
   \item{...}{further arguments for eastetics. See
   \code{\link{aes}}}

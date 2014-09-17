@@ -5,6 +5,11 @@
 probabilityFun(x, sample, cf = NULL, density = TRUE, M = 10, dx = 0.01,
   ...)
 }
+\arguments{
+  \item{x,sample,cf,M,dx,...}{arguments of the function}
+
+  \item{density}{logical value}
+}
 \description{
 Probibilty density function obtained by a spline
 interpolation

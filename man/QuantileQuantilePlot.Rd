@@ -2,11 +2,10 @@
 \alias{QuantileQuantilePlot}
 \title{Quantile-Quantile Plot}
 \usage{
-QuantileQuantilePlot(x = Tn_mes, y = Tn_gen, qqx = NULL,
-  xlab = "observed", ylab = "generated",
-  title = paste("Quantile-Quantile at", station, sep = " "), season = FALSE,
-  origin = "1960-01-01", station = "T0090", signif = 0.05,
-  name_row = "xxx", ...)
+QuantileQuantilePlot(x, y, qqx = NULL, xlab = "observed",
+  ylab = "generated", title = paste("Quantile-Quantile at", station, sep =
+  " "), season = FALSE, origin = "1960-01-01", station = "T0090",
+  signif = 0.05, name_row = "xxx", ...)
 }
 \arguments{
   \item{x}{oberserved variable}
@@ -19,6 +18,15 @@ QuantileQuantilePlot(x = Tn_mes, y = Tn_gen, qqx = NULL,
 
   \item{signif}{singificance used to plot confindence
   interval. Default is 0.05. (Actually not used!)}
+
+  \item{xlab,ylab,title}{title and axis labels}
+
+  \item{season}{logical value. If \code{TRUE} (default)
+  plots are separated per seasons.}
+
+  \item{origin}{date releted of the first row}
+
+  \item{station,name_row}{further arguments}
 
   \item{...}{further arguments for eastetics. See
   \code{\link{aes}}}

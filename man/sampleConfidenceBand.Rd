@@ -7,6 +7,9 @@ sampleConfidenceBand(x, sample, signif = 0.05, probs = (0:nprobs)/nprobs,
 }
 \arguments{
   \item{x}{sample}
+
+  \item{sample,signif,probs,nprobs,scale,...}{other
+  arguments}
 }
 \description{
 It plots the extremes of a centered confidential band from

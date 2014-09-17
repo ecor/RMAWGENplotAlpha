@@ -77,22 +77,25 @@ NULL
 #' 
 #' Function which plots the correlation among observed and generated variables
 #'
-#' @param x oberserved variable
-#' @param y generated variable
+#' @param x oberserved variable, e. g. \code{Tn_mes}
+#' @param y generated variable, , e. g. \code{Tn_gen}
 #' @param corx correlation of obervations. It must be a \code{NULL} object or a single correlation matrix or a list of correlation matrices.
-#' @param use,method see \code{\link{cor}} 
+# ##### @param use,method see \code{\link{cor}} 
 #' @param lag lag for autocorrelation 
 #' @param return.just.data.frame logical value. If \code{TRUE} functions returns no plot but just the date frame between observed and modeled autocrosscorrelations. Default is \code{FALSE}. 
-#' @param cor.null.value null value for correlation corresponc test. See \code{\link{cocor.indep.groups}} or \url{http://comparingcorrelations.org/}.
+#' @param cor.null.value null value for correlation correspond test. See \code{cocor.indep.groups} or \url{http://comparingcorrelations.org/}.
 #' @param useGPCA integer value. If it is greater than 0, GPCA interations are made in preprocessing. See \code{\link{GPCA}}. Default is 0, no GPCA are preprocessed.
 #' @param signif singificance used to plot confindence interval. Default is 0.05 . 
+#' @param xlab,ylab,title title and axis labels
+#' @param season logical value. If \code{TRUE} (default) plots are separated per seasons.
+#' @param origin date corresponding to the first row
 #' @param ... further arguments for eastetics. See \code{\link{aes}} 
 #' 
 #' 
 #' 
 
 
-corplotlag <- function(x=Tn_mes,y=Tn_gen,corx=NULL,
+corplotlag <- function(x,y,corx=NULL,
 		xlab="observed",ylab="generated",title="Spatial Correlation",season=FALSE,origin="1960-01-01",return.just.data.frame=FALSE,lag=1,cor.null.value=0,useGPCA=0,signif=0.05,...) {
 	
 	if (is.data.frame(y)) {
@@ -269,7 +272,7 @@ corplotlag <- function(x=Tn_mes,y=Tn_gen,corx=NULL,
 	asp <- length(unique(df$season))/length(unique(df$level))
 ############	aes <- aes(x=observed,y=generated,shape=level,group=season,col=level,...)
 	out <- qplot(observed,generated, data = df, geom = "point", group = level,method=lm,asp=1) +
-			facet_grid(season ~ level, scale = "fixed")+xlab(xlab)+ylab(ylab)+ggtitle(title)+geom_abline() 
+			facet_grid(season ~ level, scales = "fixed")+xlab(xlab)+ylab(ylab)+ggtitle(title)+geom_abline() 
 
 	if (cor.null.value>=0) out <- out+geom_ribbon(mapping=aes(x=observed,ymax=value_max,ymin=value_min),data=df,alpha=0.4)    ### cor.null.value
 ####  
@@ -285,10 +288,22 @@ NULL
 #'
 #' Function which plots the correlation among observed and generated variables for more lags
 #' 
+#' @param x e.g. \code{Tn_mes}
+#' @param y e.g. \code{Tn_gen}
+#' @param xlab,ylab,title title and axis labels
+#' @param lag lag for autocorrelation 
+# @param return.just.data.frame logical value. If \code{TRUE} functions returns no plot but just the date frame between observed and modeled autocrosscorrelations. Default is \code{FALSE}. 
+
+# @param season logical value. If \code{TRUE} (default) plots are separated per seasons.
+# @param origin date corresponding to the first row
+#' @param ... further arguments
+#' 
 #' @export
 #' @seealso \code{\link{corplotlag}}
-#' 
-corplotlags <- function(x=Tn_mes,y=Tn_gen,lag=c(0,1,4),return.just.data.frame=FALSE,
+#### return.just.data.frame=FALSE,
+
+
+corplotlags <- function(x,y,lag=c(0,1,4),
 	xlab="observed",ylab="generated",title="Spatial Correlation",...) {
 	
 	df <- corplotlag(x=x,y=y,lag=lag[1],return.just.data.frame=TRUE,season=FALSE,...)
@@ -306,7 +321,7 @@ corplotlags <- function(x=Tn_mes,y=Tn_gen,lag=c(0,1,4),return.just.data.frame=FA
 	}
 	df$lag <- paste(df$lag,"-day lag",sep="")
 	out <- qplot(observed,generated, data = df, geom = "point", group = level,method=lm,asp=1) +
-			facet_grid(lag ~ level, scale = "fixed")+xlab(xlab)+ylab(ylab)+ggtitle(title)+geom_abline() 
+			facet_grid(lag ~ level, scales = "fixed")+xlab(xlab)+ylab(ylab)+ggtitle(title)+geom_abline() 
 	str(df)
 	out <- out+geom_ribbon(mapping=aes(x=observed,ymax=value_max,ymin=value_min),data=df,alpha=0.4)    ### cor.null.value
 	

@@ -4,7 +4,7 @@
 \usage{
 spellBoxPlot(x = dw.spell.dry.mes, y = dw.spell.dry.gen,
   use.dw.spell = FALSE, field = "spell_length", station = c("T0010",
-  "T0090", "T0129"), type = c("P03GPCA", "RMRAINGEN"),
+  "T0090", "T0129"), type = c("P03GPCA", "RMRAINGEN", "generated"),
   title = "Dry Spell Duration", extract = "dry", observationIndex = "obs",
   xlab = "type", ylab = "dry spell [day]", season = TRUE, ...)
 }
@@ -15,6 +15,8 @@ spellBoxPlot(x = dw.spell.dry.mes, y = dw.spell.dry.gen,
 
   \item{use.dw.spell}{logical value. If \code{TRUE} it uses
   internally \code{\link{dw.spell}}}
+
+  \item{extract}{see \code{\link{dw.spell}}}
 
   \item{field}{field to be represented}
 
@@ -33,8 +35,7 @@ spellBoxPlot(x = dw.spell.dry.mes, y = dw.spell.dry.gen,
   \item{season}{logical value. If \code{TRUE} the boxplot
   is represeted seasonally.}
 
-  \item{...}{further arguments for
-  \code{\link{use.dw.spell}}}
+  \item{...}{further arguments for \code{\link{dw.spell}}}
 }
 \value{
 the boxplot of dry or wet spells (Experimental).

@@ -1,4 +1,4 @@
-
+####### observed
 
 NULL
 #' Quantile-Quantile Plot
@@ -9,6 +9,10 @@ NULL
 #' @param y generated variable
 #' @param qqx correlation of obervations. It must be a \code{NULL} object or a single correlation matrix or a list of correlation matrices.
 #' @param signif singificance used to plot confindence interval. Default is 0.05. (Actually not used!) 
+#' @param xlab,ylab,title title and axis labels
+#' @param season logical value. If \code{TRUE} (default) plots are separated per seasons.
+#' @param origin date releted of the first row
+#' @param station,name_row  further arguments
 #' @param ... further arguments for eastetics. See \code{\link{aes}} 
 #' 
 #' 
@@ -20,7 +24,7 @@ NULL
 #' @export
 #' 
 
-QuantileQuantilePlot <- function(x=Tn_mes,y=Tn_gen,qqx=NULL,xlab="observed",ylab="generated",title=paste("Quantile-Quantile at",station,sep=" "),season=FALSE,origin="1960-01-01",station="T0090",signif=0.05,name_row="xxx",...) {
+QuantileQuantilePlot <- function(x,y,qqx=NULL,xlab="observed",ylab="generated",title=paste("Quantile-Quantile at",station,sep=" "),season=FALSE,origin="1960-01-01",station="T0090",signif=0.05,name_row="xxx",...) {
 	
 	
 	
@@ -137,11 +141,11 @@ QuantileQuantilePlot <- function(x=Tn_mes,y=Tn_gen,qqx=NULL,xlab="observed",ylab
 	
 ###	df <- df[df$observed!=1 | df$generated!=1,]
 	
-############	aes <- aes(x=observed,y=generated,shape=level,group=season,col=level,...)
+############	aes <- aes(x=observed,y=generated,shape=level,group=season,col=level,...) ## fun_factor
 	out <-  qplot(observed,generated, data = df, geom = "point", asp=1) ## group = level,method=lm,
 ##	if (!is.na(signif) & (signif>0))  out <- out+geom_ribbon(mapping=aes(x=observed,ymax=value_max,ymin=value_min),data=df,alpha=0.4)    ### group=df$levelcor.null.value
 	
-	out <- out+facet_grid(season ~ level, scale = "fixed")+xlab(xlab)+ylab(ylab)+ggtitle(title)+geom_abline() 
+	out <- out+facet_grid(season ~ level, scales = "fixed")+xlab(xlab)+ylab(ylab)+ggtitle(title)+geom_abline() 
 	
 	return(out)
 
@@ -153,17 +157,18 @@ NULL
 #' Kolgoromv-Smirnov testing  
 #' 
 #' 
-#' @param x 
-#' @param y 
+#' @param x observed value (data frame)
+#' @param y modeled or genereted values (list or data frame)
 #' @param origin_x,origin_y,origin origin day of the datasets. Default is \code{"1960-01-01"}
+#' @param remove.extremes integer parameters. Default is 0.  
 #' @param fun.test function for test . See \code{\link{ks.test}} or \code{\link{wilcox.test}}
-#' @param station
+#' @param station utilized stations. They must be column names of  \code{x}.
 #' 
 #' @param ... further arguments for \code{fun.test}
 #' 
 #' 
 
-## USAGE: fun.test.season(Tx_mes,Tx_gen[[4]],station="T0090",fun.test=ks.test,alternative="greater",remove.extremes=0)
+## USAGE: fun.test.season(Tx_mes,Tx_gen[[4]],station="T0090",fun.test=ks.test,alternative="greater",remove.extremes=0) facet_grid
 
 fun.test.season <- function(x,y,origin="1960-01-01",station="T0090",origin_x=origin,origin_y=origin,fun.test=ks.test,remove.extremes=0,...) { 
 

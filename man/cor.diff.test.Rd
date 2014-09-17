@@ -4,6 +4,9 @@
 \usage{
 cor.diff.test(r1, r2, n1, n2, alternative = c("two.sided", "less", "greater"))
 }
+\arguments{
+  \item{r1,r2,n1,n2,alternative}{arguments of the function}
+}
 \description{
 cor.diff.test description
 }

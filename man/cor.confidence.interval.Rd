@@ -5,7 +5,7 @@
 cor.confidence.interval(r1, r2 = NA, n, signif = 0.05)
 }
 \arguments{
-  \item{r1,r2}{correltion coefficients of the two paired
+  \item{r1,r2}{correlation coefficients of the two paired
   samples}
 
   \item{n}{length (size) of the two paired samples}

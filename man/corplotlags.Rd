@@ -2,9 +2,19 @@
 \alias{corplotlags}
 \title{Function which plots the correlation among observed and generated variables for more lags}
 \usage{
-corplotlags(x = Tn_mes, y = Tn_gen, lag = c(0, 1, 4),
-  return.just.data.frame = FALSE, xlab = "observed", ylab = "generated",
+corplotlags(x, y, lag = c(0, 1, 4), xlab = "observed", ylab = "generated",
   title = "Spatial Correlation", ...)
+}
+\arguments{
+  \item{x}{e.g. \code{Tn_mes}}
+
+  \item{y}{e.g. \code{Tn_gen}}
+
+  \item{xlab,ylab,title}{title and axis labels}
+
+  \item{lag}{lag for autocorrelation}
+
+  \item{...}{further arguments}
 }
 \description{
 Function which plots the correlation among observed and

@@ -27,46 +27,61 @@
 #library(ggplot2)
 #library(reshape2)
 #library(RMAWGEN)
+#fun.test.season
+NULL
+#' addseson  
+#' 
+#' Adding season attribute to a data frame 
+#' 
+#' @param data data frame
+#' @param origin Origin Date as a string 
+#' @param nodata logical value
+#' 
+#' 
+#' 
+#' @export
+#' 
+#' 
 
-
-#
-#addseason <- function(data,origin,nodata=TRUE) {
-#	
-#	
-#	winter <- c(12,1,2) #c("Dec","Jan","Feb")
-#	spring <- c(3,4,5)  #c("Mar","Apr","May")
-#	summer <- c(6,7,8)  #c("Jun","Jul","Aug")
-#	autumn <- c(9,10,11) #c("Sep","Oct","Nov")
-#	
-#	
-#	out <- adddate(data,origin=origin)
-#	
-#	
-#	season <- array("noseason",length(data$month))
-#	season[out$month %in% winter] <- "a) DJF"
-#	season[out$month %in% spring] <- "b) MAM"
-#	season[out$month %in% summer] <- "c) JJA"
-#	season[out$month %in% autumn] <- "d) SON"
-#	
-#	out$season <- factor(season)
-#	if (nodata) out <- out[c("season",names(data))]
-#	
-#	return(out)
-#	
-#}
+addseason <- function(data,origin,nodata=TRUE) {
+	
+	
+	winter <- c(12,1,2) #c("Dec","Jan","Feb")
+	spring <- c(3,4,5)  #c("Mar","Apr","May")
+	summer <- c(6,7,8)  #c("Jun","Jul","Aug")
+	autumn <- c(9,10,11) #c("Sep","Oct","Nov")
+	
+	
+	out <- adddate(data,origin=origin)
+	
+	
+	season <- array("noseason",length(data$month))
+	season[out$month %in% winter] <- "a) DJF"	
+	season[out$month %in% spring] <- "b) MAM"
+	season[out$month %in% summer] <- "c) JJA"
+	season[out$month %in% autumn] <- "d) SON"
+	
+	out$season <- factor(season)
+	if (nodata) out <- out[c("season",names(data))]
+	
+	return(out)
+	
+}
 
 
 NULL
 #'
 #' Applies a function to a data frame according to a FACTOR field. 
 #' 
-#' @param dataset
+#' @param data input dataset as a data.frame class
 #' @param factor field of \code{data} which is a factor.
-#'  
+#' @param fun function
+#' @param returns.data.frame logical value. Default is \code{TRUE}.
+#' @param ... further arguments or \code{fun}
 #' 
 #' 
 #' 
-#' 
+#' @export
 #' 
 #' 
 
@@ -141,7 +156,7 @@ fun_factor <- function(data,factor=NA,fun,returns.data.frame=TRUE,...) {
 	
 }
 
-
+## fun.test.season 
 
 #'
 #' Function which plots the correlation among observed and generated variables
@@ -150,13 +165,16 @@ fun_factor <- function(data,factor=NA,fun,returns.data.frame=TRUE,...) {
 #' @param y generated variable
 #' @param corx correlation of obervations. It must be a \code{NULL} object or a single correlation matrix or a list of correlation matrices.
 #' @param use,method see \code{\link{cor}} 
+#' @param xlab,ylab,title title and axis labels
+#' @param season logical value. If \code{TRUE} (default) plots are separated per seasons.
+#' @param origin date releted of the first row
 #' @param ... further arguments for eastetics. See \code{\link{aes}} 
 #' 
-#' 
+#' @export
 #' 
 
 
-corplot <- function(x=Tn_mes,y=Tn_gen,use = "everything",corx=NULL,
+corplot <- function(x,y,use = "everything",corx=NULL,
 		method = c("pearson", "kendall", "spearman"),xlab="observed",ylab="generated",title="Spatial Correlation",season=FALSE,origin="1960-01-01",...) {
 	
 	if (is.data.frame(y)) {
@@ -246,7 +264,7 @@ corplot <- function(x=Tn_mes,y=Tn_gen,use = "everything",corx=NULL,
 	
 ############	aes <- aes(x=observed,y=generated,shape=level,group=season,col=level,...)
 	out <- qplot(observed,generated, data = df, geom = "point", group = level) +
-			facet_grid(season ~ level, scale = "fixed")+xlab(xlab)+ylab(ylab)+ggtitle(title)+geom_abline() 
+			facet_grid(season ~ level, scales = "fixed")+xlab(xlab)+ylab(ylab)+ggtitle(title)+geom_abline() 
 #	out <- ggplot()+geom_point(mapping=aes,data=df)+xlab(xlab)+ylab(ylab)+ggtitle(title)+geom_abline() 
 #	if (season) out <- out+facet_grid(season~season,scale="fixed")
 	return(out)

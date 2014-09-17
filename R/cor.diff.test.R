@@ -8,6 +8,8 @@ NULL
 #' 
 #' cor.diff.test description
 #' 
+#' @param r1,r2,n1,n2,alternative   arguments of the function
+#' 
 # http://comparingcorrelations.org/
 #' 
 #' 

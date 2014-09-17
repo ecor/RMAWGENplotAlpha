@@ -7,15 +7,20 @@ NULL
 #' 
 #' Correlation between log-precipitation and daily temperature
 #' 
-#' @param prec_gen list of precipitation data frames 
-#' @param Tx_gen,Tn_gen list of daily maximim and minimum temperature data frames
+#' @param prec list of precipitation data frames 
+#' @param Tx,Tn list of daily maximim and minimum temperature data frames
+#' @param xlab,ylab,title title and axis labels
+#' @param origin date corresponding to the first row
+#' @param station names of the stations to be used for plot
+#' @param valmin minimum accebtable value for precipitation
+#' @param ... further arguments 
 #' 
 #' @export 
 #' 
 #' 
 
-
-logcor.plot <- function(prec=prec_gen,Tx=Tx_gen,Tn=Tn_gen,station=station,origin="1961-01-01",valmin=0.5,xlab="xlab",ylab="ylab",title="tilte",...) {
+## corplotlags
+logcor.plot <- function(prec,Tx,Tn,station,origin="1961-01-01",valmin=0.5,xlab="xlab",ylab="ylab",title="tilte",...) {
 	sample <- "seasonally"
 	extract_cor_value <- function(...) {
 		
@@ -65,7 +70,7 @@ logcor.plot <- function(prec=prec_gen,Tx=Tx_gen,Tn=Tn_gen,station=station,origin
 	##
 	out <-  qplot(configuration,estimate, data = cors_estimate, geom = "point",shape=configuration,asp=1)
 	
-	out <- out+facet_grid(season ~ station, scale = "fixed")+xlab(xlab)+ylab(ylab)+ggtitle(title)
+	out <- out+facet_grid(season ~ station, scales = "fixed")+xlab(xlab)+ylab(ylab)+ggtitle(title)
 	out <- out+geom_linerange(mapping=aes(x=configuration,ymax=max,ymin=min),data=cors_estimate)
 	out <- out+scale_x_discrete(labels="")
 	return(out)	
@@ -79,8 +84,19 @@ NULL
 #' 
 #'  Bar plot for  temperature differantiating "dry" or "wet" days.
 #' 
+#' @param prec precipitation, e. g. \code{prec_gen}
+#' @param Tx maximum temperature, e. g. \code{Tx_gen}
+#' @param Tn minimum temperature, e. g. \code{Tn_gen}
+#' @param station names of the stations to be used for plot 
+#' @param origin date of the first row 
+#' @param variable variable 
+#' @param valmin minimum accebtable value for precipitation
+#' @param xlab,ylab,title title and axis labels
+#' @param ... further arguments
+#' 
+#' 
 #' @export
-temperature.wetdry.barplot <- function(prec=prec_gen,Tx=Tx_gen,Tn=Tn_gen,station,origin="1961-01-01",valmin=0.5,xlab="xlab",ylab="ylab",title="title",variable,...) {
+temperature.wetdry.barplot <- function(prec,Tx,Tn,station,origin="1961-01-01",valmin=0.5,xlab="xlab",ylab="ylab",title="title",variable,...) {
 
 	sample <- "seasonally"
     if (length(station)>1) station <- station[1]
@@ -133,9 +149,9 @@ temperature.wetdry.barplot <- function(prec=prec_gen,Tx=Tx_gen,Tn=Tn_gen,station
 	df <- rbind(out_tx,out_tn,out_dt)
 	
 	conf <- unique(as.character(df$configuration))
-	##df <- df[df$station %in% station,]
+	##df <- df[df$station %in% station,] cocor.indep.groups ## use.dw.spell
 	df <- df[df$variable==variable,]
-	##
+	## Tn_mes
 	out <- ggplot(df, aes(x=configuration,y=value))+geom_boxplot()+xlab(xlab)+ylab(ylab)+ggtitle(title)+scale_x_discrete(labels=(1:length(conf)))
 	out <- out+facet_grid(season ~ state)
 	return(out)

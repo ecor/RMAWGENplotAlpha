@@ -13,6 +13,10 @@ NULL
 #' @param return.value string indicating which matrix returned by \code{\link{CCGamma}}. See 
 #' @param tolerance,valmin,interval,nearPD see \code{\link{CCGamma}}
 #' @param lag lag expressed in days used for the computation in \code{\link{CCGamma}}. It must contain only one value, it must not be a vector.
+#' @param xlab,ylab,title title and axis labels
+#' @param season logical value. If \code{TRUE} (default) plots are separated per seasons.
+#' @param origin date corresponding to the first row
+#' @param use see argement entry on \code{\link{cor}}.
 #' @param ... further arguments for eastetics. See \code{\link{aes}} 
 #' 
 #' @export
@@ -20,7 +24,7 @@ NULL
 #' 
 #' 
 
-ccgammaplot <- function(x=prec_mes,y=prec_gen,use = "everything",corx=NULL,
+ccgammaplot <- function(x,y,use = "everything",corx=NULL,
 return.value=c("nooccurence","occurence","continuity_ratio","nooccurence_gcorrelation"),
 lag=0,tolerance=0.0001,
 valmin = 0.5,interval = c(-1, 1),nearPD = (lag >= 0),
@@ -133,7 +137,7 @@ xlab="observed",ylab="generated",title="Spatial Correlation",season=FALSE,origin
 	
 	############	aes <- aes(x=observed,y=generated,shape=level,group=season,col=level,...)
 	out <- qplot(observed,generated, data = df, geom = "point", group = level) +
-			facet_grid(season ~ level, scale = "fixed")+xlab(xlab)+ylab(ylab)+ggtitle(title)+geom_abline()+scale_x_continuous(breaks=breaks,labels = labels) ## added on ec 20120427
+			facet_grid(season ~ level, scales = "fixed")+xlab(xlab)+ylab(ylab)+ggtitle(title)+geom_abline()+scale_x_continuous(breaks=breaks,labels = labels) ## added on ec 20120427
 #	out <- ggplot()+geom_point(mapping=aes,data=df)+xlab(xlab)+ylab(ylab)+ggtitle(title)+geom_abline() 
 #	if (season) out <- out+facet_grid(season~season,scale="fixed")
 	return(out)

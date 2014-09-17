@@ -7,7 +7,7 @@ NULL
 #'
 #' This calcultets the confidence interval 
 #' 
-#' @param r1,r2 correltion coefficients of the two paired samples
+#' @param r1,r2 correlation coefficients of the two paired samples
 #' @param n length (size) of the two paired samples
 #' @param signif significance
 #' 

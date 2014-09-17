@@ -8,7 +8,9 @@ NULL
 #' Probibilty density function obtained by a spline interpolation 
 #'
 #'
-#'
+#'  @param x,sample,cf,M,dx,... arguments of the function
+#'  @param density logical value
+
 #' @seealso \code{ecdf}
 #' 
 #' x <- rnorm(1000)
@@ -57,7 +59,8 @@ NULL
 #' It plots the extremes of a centered confidential band from an empirical distribution given by a sample \code{x}.
 #' 
 #' @param x sample
-#' 
+#' @param sample,signif,probs,nprobs,scale,... other arguments 
+
 #' 
 #' 
 #' 
