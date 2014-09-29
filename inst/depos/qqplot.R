@@ -56,7 +56,13 @@ QuantileQuantilePlot <- function(x,y,qqx=NULL,xlab="observed",ylab="generated",t
 
 	}
 	
-	
+	# 
+	# 
+	#
+	#
+	#
+	#
+	#
 
 	
 	
@@ -65,6 +71,11 @@ QuantileQuantilePlot <- function(x,y,qqx=NULL,xlab="observed",ylab="generated",t
 		y[[i]][,xlab] <- x$value
 	
 	}
+	
+	
+	#str(x)
+	#xx <<- x
+	#stop()
 	
 	####  observation and value (generation) must be of the same length
 	
@@ -78,6 +89,31 @@ QuantileQuantilePlot <- function(x,y,qqx=NULL,xlab="observed",ylab="generated",t
 					
 					value <- sort(x$value[as.character(x$season)==it])
 					observed <- sort(x$observed[as.character(x$season)==it])
+					
+					## FROM qqplot function source code 
+					sx <- value
+					sy <- observed
+					##
+					
+					
+					##
+					lenx <- length(sx)
+					leny <- length(sy)
+					
+					if (leny < lenx) 
+						sx <- approx(1L:lenx, sx, n = leny)$y
+					if (leny > lenx) 
+						sy <- approx(1L:leny, sy, n = lenx)$y
+					##
+					value <- sx[1:lenx]
+					observed <- sy[1:leny]
+					print(length(sx))
+					print(sx)
+					print(length(sy))
+					print(sy)
+					
+					
+					## END
 					
 					out$value[as.character(out$season)==it] <- value
 					out$observed[as.character(out$season)==it] <- observed
@@ -140,6 +176,7 @@ QuantileQuantilePlot <- function(x,y,qqx=NULL,xlab="observed",ylab="generated",t
 	
 	
 ###	df <- df[df$observed!=1 | df$generated!=1,]
+
 	
 ############	aes <- aes(x=observed,y=generated,shape=level,group=season,col=level,...) ## fun_factor
 	out <-  qplot(observed,generated, data = df, geom = "point", asp=1) ## group = level,method=lm,
@@ -172,10 +209,10 @@ NULL
 
 fun.test.season <- function(x,y,origin="1960-01-01",station="T0090",origin_x=origin,origin_y=origin,fun.test=ks.test,remove.extremes=0,...) { 
 
-
+	
 	x <- addseason(data=x,origin=origin_x,nodata=TRUE)
 	y <- addseason(data=y,origin=origin_y,nodata=TRUE)
-	
+
 	season <- unique(as.character(x$season))
 	
 	names(season) <- season

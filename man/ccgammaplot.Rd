@@ -4,10 +4,11 @@
 \usage{
 ccgammaplot(x, y, use = "everything", corx = NULL,
   return.value = c("nooccurence", "occurence", "continuity_ratio",
-  "nooccurence_gcorrelation"), lag = 0, tolerance = 1e-04, valmin = 0.5,
-  interval = c(-1, 1), nearPD = (lag >= 0), xlab = "observed",
-  ylab = "generated", title = "Spatial Correlation", season = FALSE,
-  origin = "1960-01-01", ...)
+  "nooccurence_gcorrelation", "nooccurence_correlation"), lag = 0,
+  tolerance = 1e-04, valmin = 0.5, interval = c(-1, 1), nearPD = (lag >=
+  0), xlab = "observed", ylab = "generated",
+  title = "Spatial Correlation", season = FALSE, origin = "1960-01-01",
+  ...)
 }
 \arguments{
   \item{x}{oberserved variable}

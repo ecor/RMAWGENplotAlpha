@@ -52,7 +52,15 @@ addseason <- function(data,origin,nodata=TRUE) {
 	autumn <- c(9,10,11) #c("Sep","Oct","Nov")
 	
 	
-	out <- adddate(data,origin=origin)
+	if ("month" %in% names(data)) {
+		
+		out <- out
+		
+	} else {
+		
+		out <- adddate(data,origin=origin)
+	}
+	
 	
 	
 	season <- array("noseason",length(data$month))
